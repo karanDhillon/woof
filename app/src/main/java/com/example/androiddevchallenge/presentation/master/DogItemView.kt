@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge.presentation
+package com.example.androiddevchallenge.presentation.master
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -8,11 +8,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.transform.CircleCropTransformation
+import com.example.androiddevchallenge.data.models.Dog
+import com.example.androiddevchallenge.presentation.WoofViewModel
 import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun DogItemView(
     viewModel: WoofViewModel,
+    dog: Dog,
     onDogSelected: (dogId: Int) -> Unit
 ) {
     Row(
@@ -22,7 +25,7 @@ fun DogItemView(
             .fillMaxWidth()
     ) {
         CoilImage(
-            data = "https://cdn2.thedogapi.com/images/SkM9sec47_1280.jpg",
+            data = dog.imageUrl,
             modifier = Modifier.requiredSize(60.dp),
             contentDescription = "doggo",
             requestBuilder = {
@@ -30,6 +33,6 @@ fun DogItemView(
             }
         )
         Spacer(modifier = Modifier.requiredSize(12.dp))
-        Text(text = "Dog breed goes here", style = MaterialTheme.typography.h6)
+        Text(text = dog.name, style = MaterialTheme.typography.h6)
     }
 }
