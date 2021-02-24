@@ -23,6 +23,7 @@ fun DogListView(
                         DogItemView(
                             viewModel = viewModel,
                             dog = dog,
+                            dogId = dog.id,
                             onDogSelected = onDogSelected
                         )
                     }

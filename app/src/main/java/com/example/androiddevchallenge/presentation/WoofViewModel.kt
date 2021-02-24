@@ -17,11 +17,15 @@ class WoofViewModel : ViewModel() {
         viewModelScope.launch {
             dogs.value = repository
                 .getDogs()
-                .map {
+                .map { dogResponse ->
                     Dog(
-                        name = it.id ?: "",
-                        imageUrl = it.url ?: ""
+                        id = dogResponse.id ?: "",
+                        name = dogResponse.breeds?.firstOrNull()?.name ?: "",
+                        imageUrl = dogResponse.url ?: ""
                     )
+                }
+                .filter { dog ->
+                    dog.name.isNotEmpty() || dog.name.isNotBlank()
                 }
         }
     }

@@ -16,6 +16,7 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 fun DogItemView(
     viewModel: WoofViewModel,
     dog: Dog,
+    dogId: String,
     onDogSelected: (dogId: Int) -> Unit
 ) {
     Row(
@@ -26,13 +27,17 @@ fun DogItemView(
     ) {
         CoilImage(
             data = dog.imageUrl,
-            modifier = Modifier.requiredSize(60.dp),
+            modifier = Modifier.requiredSize(80.dp),
             contentDescription = "doggo",
             requestBuilder = {
                 transformations(CircleCropTransformation())
             }
         )
         Spacer(modifier = Modifier.requiredSize(12.dp))
-        Text(text = dog.name, style = MaterialTheme.typography.h6)
+        Text(
+            text = dog.name,
+            style = MaterialTheme.typography.h6,
+            color = MaterialTheme.colors.onSurface
+        )
     }
 }
