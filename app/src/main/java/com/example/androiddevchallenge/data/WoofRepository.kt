@@ -1,6 +1,6 @@
 package com.example.androiddevchallenge.data
 
-import com.example.androiddevchallenge.data.models.DogResponse
+import com.example.androiddevchallenge.data.models.Breed
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -9,8 +9,16 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 class WoofRepository {
-    suspend fun getDogs(): List<DogResponse> {
-        val response = getWoofService().getDogs()
+    suspend fun getDogBreeds(): List<Breed> {
+        val response = getWoofService().getBreeds()
+        val illegalAccessException = IllegalAccessException("Response from remote was not successful.")
+
+        if (response.isSuccessful) return response.body() ?: throw illegalAccessException
+        else throw illegalAccessException
+    }
+
+    suspend fun getDogBreed(breedName: String): Breed {
+        val response = getWoofService().getBreed(breedName)
         val illegalAccessException = IllegalAccessException("Response from remote was not successful.")
 
         if (response.isSuccessful) return response.body() ?: throw illegalAccessException

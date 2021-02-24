@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -14,9 +15,7 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 
 @Composable
 fun DogItemView(
-    viewModel: WoofViewModel,
     dog: Dog,
-    dogId: String,
     onDogSelected: (dogId: Int) -> Unit
 ) {
     Row(

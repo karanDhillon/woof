@@ -2,12 +2,6 @@ package com.example.androiddevchallenge.data.models
 
 import com.squareup.moshi.Json
 
-data class DogResponse(
-     @Json(name = "breeds") val breeds: List<Breed>?,
-     @Json(name = "id") val id: String?,
-     @Json(name = "url") val url: String?
-)
-
 data class Breed(
      @Json(name = "weight") val weight: Weight?,
      @Json(name = "height") val height: Height?,
@@ -17,6 +11,7 @@ data class Breed(
      @Json(name = "breed_group") val breedGroup: String?,
      @Json(name = "life_span") val lifeSpan: String?,
      @Json(name = "temperament") val temperament: String?,
+     @Json(name = "image") val image: Image?
 )
 
 data class Weight(
@@ -27,4 +22,8 @@ data class Weight(
 data class Height(
      @Json(name = "imperial") val imperial: String? = "",
      @Json(name = "metric") val metric: String? = ""
+)
+
+data class Image(
+     @Json(name = "url") val url: String? = ""
 )
