@@ -17,47 +17,25 @@ package com.example.androiddevchallenge.presentation
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.presentation.master.DogListView
 import com.example.androiddevchallenge.presentation.theme.MyTheme
-import dev.chrisbanes.accompanist.coil.CoilImage
-import dev.chrisbanes.accompanist.glide.GlideImage
 
 class MainActivity : AppCompatActivity() {
+    private val woofViewModel: WoofViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                DogItemView()
+                DogListView(
+                    woofViewModel,
+                    onDogSelected = { }
+                )
             }
         }
-    }
-}
-
-
-@Preview("Dog Item", widthDp = 360, heightDp = 640)
-@Composable
-fun DogItemViewPreview() {
-    DogItemView()
-}
-
-@Composable
-fun DogItemView() {
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        CoilImage(
-            data = "https://cdn2.thedogapi.com/images/SkM9sec47_1280.jpg",
-            modifier = Modifier.fillMaxSize(),
-            contentDescription = "doggo"
-        )
     }
 }
