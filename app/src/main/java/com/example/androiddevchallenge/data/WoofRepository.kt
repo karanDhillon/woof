@@ -1,6 +1,7 @@
 package com.example.androiddevchallenge.data
 
 import com.example.androiddevchallenge.data.models.Breed
+import com.example.androiddevchallenge.data.models.Dog
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

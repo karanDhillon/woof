@@ -21,6 +21,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
+import androidx.navigation.compose.*
+import com.example.androiddevchallenge.presentation.details.DogDetailsView
 import com.example.androiddevchallenge.presentation.master.DogListView
 import com.example.androiddevchallenge.presentation.theme.MyTheme
 
@@ -31,10 +34,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                DogListView(
-                    woofViewModel,
-                    onDogSelected = { }
-                )
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Navigation.MasterScreen.title
+                ) {
+                    composable(Navigation.MasterScreen.title) {
+                        DogListView(
+                            woofViewModel,
+                            onDogSelected = { breedName ->
+                                navController.navigate(Navigation.DetailScreen.title + "/$breedName")
+                            }
+                        )
+                    }
+
+                    composable(
+                        Navigation.DetailScreen.title + "/{breedName}",
+                        arguments = listOf(navArgument("breedName") { type = NavType.StringType })
+                    ) { navBackStackEntry ->
+                        val breedName: String? = navBackStackEntry.arguments?.getString("breedName")
+                        val dog = woofViewModel.dogs.value?.first { it.name == breedName }
+
+                        DogDetailsView(
+                            dog = dog!!,
+                            viewModel = woofViewModel,
+                            popBackStack = { navController.popBackStack() }
+                        )
+                    }
+                }
             }
         }
     }

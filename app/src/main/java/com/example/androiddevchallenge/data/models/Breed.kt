@@ -11,6 +11,8 @@ data class Breed(
      @Json(name = "breed_group") val breedGroup: String?,
      @Json(name = "life_span") val lifeSpan: String?,
      @Json(name = "temperament") val temperament: String?,
+     @Json(name = "origin") val origin: String?,
+     @Json(name = "description") val description: String?,
      @Json(name = "image") val image: Image?
 )
 

@@ -24,7 +24,7 @@ import com.example.androiddevchallenge.presentation.WoofViewModel
 @Composable
 fun DogListView(
     viewModel: WoofViewModel,
-    onDogSelected: (dogId: Int) -> Unit
+    onDogSelected: (breedName: String) -> Unit
 ) {
     val dogs = viewModel.dogs.observeAsState()
     val dogQuery = viewModel.dogQuery

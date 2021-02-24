@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.presentation.master
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,13 +17,14 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 @Composable
 fun DogItemView(
     dog: Dog,
-    onDogSelected: (dogId: Int) -> Unit
+    onDogSelected: (breedName: String) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(16.dp)
             .fillMaxWidth()
+            .clickable { onDogSelected(dog.name) }
     ) {
         CoilImage(
             data = dog.imageUrl,

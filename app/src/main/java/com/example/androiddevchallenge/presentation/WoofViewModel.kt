@@ -19,13 +19,7 @@ class WoofViewModel : ViewModel() {
         viewModelScope.launch {
             dogs.value = repository
                 .getDogBreeds()
-                .map { breed ->
-                    Dog(
-                        id = breed.id ?: 0,
-                        name = breed.name ?: "",
-                        imageUrl = breed.image?.url ?: ""
-                    )
-                }
+                .map { mapBreedToDog(it) }
                 .filter { dog ->
                     dog.name.isNotEmpty() || dog.name.isNotBlank()
                 }
@@ -37,16 +31,27 @@ class WoofViewModel : ViewModel() {
             dogs.value = repository
                 .getDogBreeds()
                 .filter { it.name?.toLowerCase()?.contains(query.toLowerCase()) ?: true }
-                .map { breed ->
-                    Dog(
-                        id = breed.id ?: 0,
-                        name = breed.name ?: "",
-                        imageUrl = breed.image?.url ?: ""
-                    )
-                }
+                .map { mapBreedToDog(it) }
                 .filter { dog ->
                     dog.name.isNotEmpty() || dog.name.isNotBlank()
                 }
         }
     }
+
+    private fun mapBreedToDog(breed: Breed): Dog {
+        return Dog(
+            id = breed.id ?: 0,
+            name = breed.name ?: "",
+            imageUrl = breed.image?.url ?: "",
+            weight = breed.weight?.metric ?: "",
+            height = breed.height?.metric ?: "",
+            bredFor = breed.bredFor ?: "",
+            breedGroup = breed.breedGroup ?: "",
+            lifeSpan = breed.lifeSpan ?: "",
+            temperament = breed.temperament ?: "",
+            origin = breed.origin ?: "",
+            description = breed.description ?: ""
+        )
+    }
+
 }
