@@ -18,44 +18,46 @@ package com.example.androiddevchallenge.presentation
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.presentation.theme.MyTheme
+import dev.chrisbanes.accompanist.coil.CoilImage
+import dev.chrisbanes.accompanist.glide.GlideImage
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                DogItemView()
             }
         }
     }
 }
 
-// Start building your app here!
+
+@Preview("Dog Item", widthDp = 360, heightDp = 640)
 @Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
-    }
+fun DogItemViewPreview() {
+    DogItemView()
 }
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp()
-    }
-}
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
+fun DogItemView() {
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        CoilImage(
+            data = "https://cdn2.thedogapi.com/images/SkM9sec47_1280.jpg",
+            modifier = Modifier.fillMaxSize(),
+            contentDescription = "doggo"
+        )
     }
 }
